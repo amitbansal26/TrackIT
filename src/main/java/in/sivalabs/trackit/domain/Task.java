@@ -11,20 +11,15 @@ import java.util.List;
  * @author Siva
  *
  */
-public class Task
+public class Task extends BaseDomain
 {
 	private Integer id;
-	private Integer projId;
 	private String name;
 	private String description;
-	private Integer assignedUserId;
+	private User assignedUser;
 	private Date dueDate;
+	private Project project;
 	private List<Tag> tags = new ArrayList<>(0);
-	
-	private Integer createdBy;
-	private Date createdDate;
-	private Integer updatedBy;
-	private Date updatedDate;
 	
 	public Integer getId()
 	{
@@ -33,14 +28,6 @@ public class Task
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-	public Integer getProjId()
-	{
-		return projId;
-	}
-	public void setProjId(Integer projId)
-	{
-		this.projId = projId;
 	}
 	public String getName()
 	{
@@ -58,13 +45,13 @@ public class Task
 	{
 		this.description = description;
 	}
-	public Integer getAssignedUserId()
+	public User getAssignedUser()
 	{
-		return assignedUserId;
+		return assignedUser;
 	}
-	public void setAssignedUserId(Integer assignedUserId)
+	public void setAssignedUser(User assignedUser)
 	{
-		this.assignedUserId = assignedUserId;
+		this.assignedUser = assignedUser;
 	}
 	public Date getDueDate()
 	{
@@ -74,6 +61,14 @@ public class Task
 	{
 		this.dueDate = dueDate;
 	}
+	public Project getProject()
+	{
+		return project;
+	}
+	public void setProject(Project project)
+	{
+		this.project = project;
+	}
 	public List<Tag> getTags()
 	{
 		return tags;
@@ -82,38 +77,5 @@ public class Task
 	{
 		this.tags = tags;
 	}
-	public Integer getCreatedBy()
-	{
-		return createdBy;
-	}
-	public void setCreatedBy(Integer createdBy)
-	{
-		this.createdBy = createdBy;
-	}
-	public Date getCreatedDate()
-	{
-		return createdDate;
-	}
-	public void setCreatedDate(Date createdDate)
-	{
-		this.createdDate = createdDate;
-	}
-	public Integer getUpdatedBy()
-	{
-		return updatedBy;
-	}
-	public void setUpdatedBy(Integer updatedBy)
-	{
-		this.updatedBy = updatedBy;
-	}
-	public Date getUpdatedDate()
-	{
-		return updatedDate;
-	}
-	public void setUpdatedDate(Date updatedDate)
-	{
-		this.updatedDate = updatedDate;
-	}
-	
 	
 }

@@ -3,15 +3,21 @@
  */
 package in.sivalabs.trackit.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Siva
  *
  */
-public class Organization
+public class Organization extends BaseDomain
 {
 	private Integer id;
 	private String name;
-	private Integer adminUserId;
+	private User owner;
+	private List<User> members = new ArrayList<>(0);
+	private List<Team> teams = new ArrayList<>(0);
+	
 	
 	public Integer getId()
 	{
@@ -29,12 +35,29 @@ public class Organization
 	{
 		this.name = name;
 	}
-	public Integer getAdminUserId()
+	public User getOwner()
 	{
-		return adminUserId;
+		return owner;
 	}
-	public void setAdminUserId(Integer adminUserId)
+	public void setOwner(User owner)
 	{
-		this.adminUserId = adminUserId;
-	}	
+		this.owner = owner;
+	}
+	public List<User> getMembers()
+	{
+		return members;
+	}
+	public void setMembers(List<User> members)
+	{
+		this.members = members;
+	}
+	public List<Team> getTeams()
+	{
+		return teams;
+	}
+	public void setTeams(List<Team> teams)
+	{
+		this.teams = teams;
+	}
+	
 }

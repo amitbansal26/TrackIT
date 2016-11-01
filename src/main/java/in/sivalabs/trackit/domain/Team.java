@@ -10,12 +10,13 @@ import java.util.List;
  * @author Siva
  *
  */
-public class Team
+public class Team extends BaseDomain
 {
 	private Integer id;
-	private Integer orgId;
 	private String name;
+	private Organization organization;
 	private List<User> members = new ArrayList<>(0);
+	private List<Project> projects = new ArrayList<>(0);
 	
 	public Integer getId()
 	{
@@ -25,14 +26,6 @@ public class Team
 	{
 		this.id = id;
 	}
-	public Integer getOrgId()
-	{
-		return orgId;
-	}
-	public void setOrgId(Integer orgId)
-	{
-		this.orgId = orgId;
-	}
 	public String getName()
 	{
 		return name;
@@ -40,6 +33,14 @@ public class Team
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+	public Organization getOrganization()
+	{
+		return organization;
+	}
+	public void setOrganization(Organization organization)
+	{
+		this.organization = organization;
 	}
 	public List<User> getMembers()
 	{
@@ -49,6 +50,13 @@ public class Team
 	{
 		this.members = members;
 	}
-	
-	
+	public List<Project> getProjects()
+	{
+		return projects;
+	}
+	public void setProjects(List<Project> projects)
+	{
+		this.projects = projects;
+	}
+
 }

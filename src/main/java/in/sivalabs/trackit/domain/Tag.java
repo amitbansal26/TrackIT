@@ -7,35 +7,40 @@ package in.sivalabs.trackit.domain;
  * @author Siva
  *
  */
-public class Tag
+public class Tag extends BaseDomain
 {
 	private Integer id;
-	private Integer orgId;
+	private Organization organization;
 	private String name;
-	
+
 	public Integer getId()
 	{
 		return id;
 	}
+
 	public void setId(Integer id)
 	{
 		this.id = id;
 	}
-	public Integer getOrgId()
+
+	public Organization getOrganization()
 	{
-		return orgId;
+		return organization;
 	}
-	public void setOrgId(Integer orgId)
+
+	public void setOrganization(Organization organization)
 	{
-		this.orgId = orgId;
+		this.organization = organization;
 	}
+
 	public String getName()
 	{
 		return name;
 	}
+
 	public void setName(String name)
 	{
 		this.name = name;
 	}
-	
+
 }
