@@ -9,4 +9,20 @@
         select * from users where id = #{id}
     </select>
     
+    
+    <select id="isEmailExists" resultType="boolean">
+    	select case when exists ( SELECT 1 FROM users WHERE email = #{email} ) 
+		   then 1 
+		   else 0 
+		end
+    </select>
+    
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+    	insert into users(name, email, password, enabled, locked, activation_token, forgot_password_token, 
+    					  created_by, created_date, updated_by, updated_date)
+    	values (#{name}, #{email}, #{password}, #{enabled}, #{locked}, #{activationToken}, #{forgotPasswordToken},
+    			#{createdBy}, #{createdDate}, #{updatedBy}, #{updatedDate}
+    			)
+    </insert>
+    
 </mapper>

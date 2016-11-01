@@ -37,4 +37,15 @@ public class UserServiceTests
 		assertEquals("superadmin@gmail.com", user.getEmail());
 		assertEquals("superadmin", user.getPassword());
 	}
+	
+	@Test
+	public void createUser()
+	{
+		User user = new User();
+		user.setEmail("siva@gmail.com");
+		user.setPassword("siva");
+		user.setName("Siva");
+		userService.createUser(user);
+		System.err.println(user.getId());
+	}
 }

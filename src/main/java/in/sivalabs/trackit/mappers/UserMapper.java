@@ -15,4 +15,8 @@ import in.sivalabs.trackit.domain.User;
 public interface UserMapper 
 {
 	User selectUserById(Integer id);
+
+	boolean isEmailExists(String email);
+
+	void insertUser(User user);
 }
