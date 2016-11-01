@@ -1,5 +1,10 @@
 
 
+DROP TABLE IF EXISTS tasks;
+DROP TABLE IF EXISTS projects;
+DROP TABLE IF EXISTS teams;
+DROP TABLE IF EXISTS orgs_users;
+DROP TABLE IF EXISTS organizations;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
@@ -11,8 +16,6 @@ CREATE TABLE users (
   UNIQUE KEY EMAIL_UNIQUE (email)
 );
 
-DROP TABLE IF EXISTS organizations;
-
 CREATE TABLE organizations (
   id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(100) NOT NULL,
@@ -22,8 +25,6 @@ CREATE TABLE organizations (
   CONSTRAINT fk_admin_user_id FOREIGN KEY (admin_user_id) REFERENCES users (id)
 );
 
-DROP TABLE IF EXISTS orgs_users;
-
 CREATE TABLE orgs_users (
   org_id int(11) NOT NULL,
   user_id int(11) NOT NULL,
@@ -31,8 +32,6 @@ CREATE TABLE orgs_users (
   PRIMARY KEY (org_id,user_id)
 );
 
-
-DROP TABLE IF EXISTS teams;
 
 CREATE TABLE teams (
   id int(11) NOT NULL AUTO_INCREMENT,
@@ -44,8 +43,6 @@ CREATE TABLE teams (
 );
 
 
-DROP TABLE IF EXISTS projects;
-
 CREATE TABLE projects (
   id int(11) NOT NULL AUTO_INCREMENT,
   org_id int(11) NOT NULL,
@@ -54,8 +51,6 @@ CREATE TABLE projects (
   UNIQUE KEY NAME_UNIQUE (org_id,name),
   CONSTRAINT fk_org_id FOREIGN KEY (org_id) REFERENCES organizations (id)
 );
-
-DROP TABLE IF EXISTS tasks;
 
 CREATE TABLE tasks (
   id int(11) NOT NULL AUTO_INCREMENT,
