@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import in.sivalabs.trackit.domain.Invitation;
 import in.sivalabs.trackit.domain.Organization;
@@ -46,6 +47,11 @@ public class UserService
 	public User findUserById(Integer id)
 	{
 		return this.userMapper.selectUserById(id);
+	}
+	
+	public User findUserByEmail(String email)
+	{
+		return this.userMapper.selectUserByEmail(email);
 	}
 	
 	public void createUser(User user)
@@ -90,5 +96,44 @@ public class UserService
 		emailService.send(invitation.getToEmail(), 
 						  "Invite To Join TrackIT", 
 						  "Hello, Please Register to TrackIT Account");
+	}
+
+	public String resetPassword(String email)
+	{
+		User user = findUserByEmail(email);
+		if(user == null)
+		{
+			throw new RuntimeException("Invalid email address");
+		}
+		String uuid = UUID.randomUUID().toString();
+		user.setForgotPasswordToken(uuid);
+		return uuid;
+	}
+
+	public void updatePassword(String email, String token, String password)
+	{
+		User user = findUserByEmail(email);
+		if(user == null)
+		{
+			throw new RuntimeException("Invalid email address");
+		}
+		if(!StringUtils.hasText(token) || !token.equals(user.getForgotPasswordToken())){
+			throw new RuntimeException("Invalid password reset token");
+		}
+		user.setPassword(password);
+		user.setForgotPasswordToken(null);
+	}
+
+	public boolean verifyPasswordResetToken(String email, String token)
+	{
+		User user = findUserByEmail(email);
+		if(user == null)
+		{
+			throw new RuntimeException("Invalid email address");
+		}
+		if(!StringUtils.hasText(token) || !token.equals(user.getForgotPasswordToken())){
+			return false;
+		}
+		return true;
 	}
 }
