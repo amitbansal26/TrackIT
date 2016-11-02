@@ -76,7 +76,7 @@
 		    <groupId>org.subethamail</groupId>
 		    <artifactId>subethasmtp-wiser</artifactId>
 		    <version>1.2</version>
-		    <optional>true</optional>
+		    <scope>test</scope>
 		</dependency>
 		
     </dependencies>
