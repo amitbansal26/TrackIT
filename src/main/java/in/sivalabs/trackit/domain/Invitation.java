@@ -13,6 +13,7 @@ public class Invitation extends BaseDomain
 	private String fromEmail;
 	private String toEmail;
 	private Organization organization;
+	private String invitationCode;
 	private boolean accepted;
 	
 	public Integer getId()
@@ -46,6 +47,14 @@ public class Invitation extends BaseDomain
 	public void setOrganization(Organization organization)
 	{
 		this.organization = organization;
+	}
+	public String getInvitationCode()
+	{
+		return invitationCode;
+	}
+	public void setInvitationCode(String invitationCode)
+	{
+		this.invitationCode = invitationCode;
 	}
 	public boolean isAccepted()
 	{

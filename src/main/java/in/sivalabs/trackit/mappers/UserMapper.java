@@ -19,4 +19,6 @@ public interface UserMapper
 	boolean isEmailExists(String email);
 
 	void insertUser(User user);
+
+	User selectUserByEmail(String email);
 }

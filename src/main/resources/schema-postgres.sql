@@ -94,6 +94,7 @@ CREATE TABLE invitations
   from_email varchar(100) NOT NULL,
   to_email varchar(100) NOT NULL,
   org_id integer NOT NULL,
+  invitation_code varchar(100) NOT NULL,
   accepted boolean DEFAULT NULL,
   created_by integer DEFAULT NULL,
   created_date date DEFAULT NULL,

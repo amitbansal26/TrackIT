@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="in.sivalabs.trackit.mappers.OrganizationMapper">
+    
+    <select id="selectOrganizationById" resultType="Organization">
+        select * from organizations where id = #{id}
+    </select>
+    
+    
+    <select id="isOrganizationNameExists" resultType="boolean">
+    	select case when exists 
+    		( SELECT 1 FROM organizations 
+    		  WHERE owner_user_id=#{user.id} and name = #{name} 
+    		) 
+		   then 1 
+		   else 0 
+		end
+    </select>
+    
+</mapper>

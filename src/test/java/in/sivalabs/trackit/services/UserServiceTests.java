@@ -5,7 +5,7 @@ package in.sivalabs.trackit.services;
 
 import static org.junit.Assert.*;
 
-import javax.mail.internet.MimeMessage;
+//import javax.mail.internet.MimeMessage;
 
 import org.junit.After;
 import org.junit.Before;
@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.subethamail.wiser.Wiser;
-import org.subethamail.wiser.WiserMessage;
+//import org.subethamail.wiser.Wiser;
+//import org.subethamail.wiser.WiserMessage;
 
 import in.sivalabs.trackit.TrackITApplication;
 import in.sivalabs.trackit.config.TrackITSettings;
@@ -36,20 +36,20 @@ public class UserServiceTests
 	@Autowired UserService userService;
 	@Value("${spring.mail.port:26}") int smtpPort;
 	
-	private Wiser wiser;
+	//private Wiser wiser;
 
     @Before
     public void setup() {
+    	/*
         wiser = new Wiser();
         wiser.setPort(smtpPort);
         wiser.start();
-
-        //MailTestUtils.reconfigureMailSenders(applicationContext, 2500);
+    	 */
     }
     
     @After
     public void after() {
-        wiser.stop();
+        //wiser.stop();
     }
     
 	@Test
@@ -74,7 +74,7 @@ public class UserServiceTests
 		user.setName("Siva");
 		userService.createUser(user);
 		assertNotNull(user.getId());
-		
+		/*
 		assertEquals("No mail messages found", 1, wiser.getMessages().size());
 
         if (wiser.getMessages().size() > 0) 
@@ -87,5 +87,15 @@ public class UserServiceTests
             assertEquals("'From' address did not match", trackitSettings.getSupportEmail(), msg.getFrom()[0].toString());
             assertEquals("'To' address did not match", "siva@gmail.com", msg.getRecipients(MimeMessage.RecipientType.TO)[0].toString());
         }
+        */
+	}
+	
+	@Test
+	public void inviteUser() throws Exception
+	{
+		Integer organizationId = 1;
+		String fromEmail = "superadmin@gmail.com";
+		String toEmail = "siva@gmail.com";
+		userService.inviteUser(fromEmail, toEmail, organizationId);
 	}
 }

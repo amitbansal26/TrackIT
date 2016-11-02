@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="in.sivalabs.trackit.mappers.InvitationMapper">
+    
+    <insert id="insertInvitation" useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO trackit.invitations 
+		(
+			from_email,to_email,org_id, invitation_code,accepted,
+			created_by, created_date, updated_by, updated_date
+		)
+		VALUES
+		(
+			#{fromEmail}, #{toEmail}, #{organization.id}, #{invitationCode}, #{accepted}, 
+			#{createdBy}, #{createdDate}, #{updatedBy}, #{updatedDate}
+		);    			
+    </insert>
+    
+</mapper>
