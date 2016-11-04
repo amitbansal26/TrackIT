@@ -30,7 +30,7 @@ public class UserAuthController extends BaseController
 {
 	private static final String viewPrefix = "public/";
 	
-	@Autowired protected UserService securityService;
+	@Autowired protected UserService userService;
 	@Autowired protected EmailService emailService;
 	@Autowired protected PasswordEncoder passwordEncoder;
 	@Autowired protected TemplateEngine templateEngine;	
@@ -47,7 +47,7 @@ public class UserAuthController extends BaseController
 		String email = request.getParameter("email");
 		try
 		{
-			String token = securityService.resetPassword(email);			
+			String token = userService.resetPassword(email);			
 			String resetPwdURL = WebUtils.getRootURL()+"/resetPwd?email="+email+"&token="+token;
 			logger.debug(resetPwdURL);
 			this.sendForgotPasswordEmail(email, resetPwdURL);
@@ -66,7 +66,7 @@ public class UserAuthController extends BaseController
 		String email = request.getParameter("email");
 		String token = request.getParameter("token");
 		
-		boolean valid = securityService.verifyPasswordResetToken(email, token);
+		boolean valid = userService.verifyPasswordResetToken(email, token);
 		if(valid){
 			model.addAttribute("email", email);
 			model.addAttribute("token", token);			
@@ -95,7 +95,7 @@ public class UserAuthController extends BaseController
 				return viewPrefix+"resetPwd";
 			}
 			String encodedPwd = passwordEncoder.encode(password);
-			securityService.updatePassword(email, token, encodedPwd);
+			userService.updatePassword(email, token, encodedPwd);
 			
 			redirectAttributes.addFlashAttribute("msg", getMessage(INFO_PASSWORD_UPDATED_SUCCESS));
 		} catch (TrackITException e)

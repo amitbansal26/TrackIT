@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import in.sivalabs.trackit.domain.User;
-import in.sivalabs.trackit.services.UserService;
+import in.sivalabs.trackit.mappers.UserMapper;
 
 /**
  * @author Siva
@@ -22,12 +22,12 @@ import in.sivalabs.trackit.services.UserService;
 public class TrackITUserDetailsService implements UserDetailsService
 {
 	@Autowired
-	private UserService userService;
+	private UserMapper userMapper;
 	
 	@Override
 	public UserDetails loadUserByUsername(String userName)
 			throws UsernameNotFoundException {
-		User user = userService.findUserByEmail(userName);
+		User user = userMapper.selectUserByEmail(userName);
 		if(user == null){
 			throw new UsernameNotFoundException("Email "+userName+" not found");
 		}

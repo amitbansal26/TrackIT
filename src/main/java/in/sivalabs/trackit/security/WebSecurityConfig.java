@@ -26,7 +26,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	private UserDetailsService customUserDetailsService;
+	private UserDetailsService userDetailsService;
 	
 	@Bean
     public PasswordEncoder passwordEncoder() {
@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-        	.userDetailsService(customUserDetailsService)
+        	.userDetailsService(userDetailsService)
         	.passwordEncoder(passwordEncoder());
     }
 }
