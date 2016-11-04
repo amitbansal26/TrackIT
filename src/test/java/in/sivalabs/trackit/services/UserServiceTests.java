@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 //import org.subethamail.wiser.Wiser;
 //import org.subethamail.wiser.WiserMessage;
@@ -31,6 +32,7 @@ import in.sivalabs.trackit.domain.User;
 @SpringBootTest(classes=TrackITApplication.class, webEnvironment=WebEnvironment.NONE)
 public class UserServiceTests 
 {
+	@Autowired PasswordEncoder passwordEncoder;
 	@Autowired TrackITSettings trackitSettings;
 	
 	@Autowired UserService userService;
@@ -60,18 +62,18 @@ public class UserServiceTests
 		
 		user = userService.findUserById(1);
 		assertNotNull(user);
-		assertEquals("superadmin", user.getName());
+		assertEquals("SuperAdmin", user.getName());
 		assertEquals("superadmin@gmail.com", user.getEmail());
-		assertEquals("superadmin", user.getPassword());
+		assertTrue(passwordEncoder.matches("superadmin", user.getPassword()));
 	}
 	
 	@Test
 	public void createUser() throws Exception
 	{
 		User user = new User();
-		user.setEmail("siva@gmail.com");
-		user.setPassword("siva");
-		user.setName("Siva");
+		user.setEmail("prasad@gmail.com");
+		user.setPassword("prasad");
+		user.setName("Prasad");
 		userService.createUser(user);
 		assertNotNull(user.getId());
 		/*

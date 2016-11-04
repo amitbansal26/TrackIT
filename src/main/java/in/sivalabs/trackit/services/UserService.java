@@ -6,6 +6,7 @@ package in.sivalabs.trackit.services;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -26,17 +27,20 @@ import in.sivalabs.trackit.mappers.UserMapper;
 @Transactional
 public class UserService 
 {
+	private PasswordEncoder passwordEncoder;
 	private EmailService emailService;
 	private UserMapper userMapper;
 	private OrganizationMapper organizationMapper;
 	private InvitationMapper invitationMapper;
 	
 	@Autowired
-	public UserService(EmailService emailService, 
+	public UserService(PasswordEncoder passwordEncoder,
+					   EmailService emailService, 
 					   UserMapper userMapper,
 					   OrganizationMapper organizationMapper,
 					   InvitationMapper invitationMapper) 
 	{
+		this.passwordEncoder = passwordEncoder;
 		this.emailService = emailService;
 		this.userMapper= userMapper;
 		this.organizationMapper = organizationMapper;
@@ -61,6 +65,8 @@ public class UserService
 		{
 			throw new TrackITException("Email already registered");
 		}
+		String encPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encPassword );
 		String activationToken = UUID.randomUUID().toString();
 		user.setActivationToken(activationToken);
 		user.setEnabled(false);
