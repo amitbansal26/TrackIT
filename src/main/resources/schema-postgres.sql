@@ -2,6 +2,7 @@
 DROP TABLE IF EXISTS invitations;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS projects;
+DROP TABLE IF EXISTS teams_users;
 DROP TABLE IF EXISTS teams;
 DROP TABLE IF EXISTS orgs_users;
 DROP TABLE IF EXISTS organizations;
