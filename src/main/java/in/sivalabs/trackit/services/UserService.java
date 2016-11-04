@@ -3,6 +3,7 @@
  */
 package in.sivalabs.trackit.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,10 @@ import in.sivalabs.trackit.domain.User;
 import in.sivalabs.trackit.exceptions.TrackITException;
 import in.sivalabs.trackit.mappers.InvitationMapper;
 import in.sivalabs.trackit.mappers.OrganizationMapper;
+import in.sivalabs.trackit.mappers.TagMapper;
+import in.sivalabs.trackit.mappers.TeamMapper;
 import in.sivalabs.trackit.mappers.UserMapper;
+import in.sivalabs.trackit.model.UserProfile;
 
 /**
  * @author Siva
@@ -32,19 +36,25 @@ public class UserService
 	private UserMapper userMapper;
 	private OrganizationMapper organizationMapper;
 	private InvitationMapper invitationMapper;
+	private TeamMapper teamMapper;
+	private TagMapper tagMapper;
 	
 	@Autowired
 	public UserService(PasswordEncoder passwordEncoder,
 					   EmailService emailService, 
 					   UserMapper userMapper,
 					   OrganizationMapper organizationMapper,
-					   InvitationMapper invitationMapper) 
+					   InvitationMapper invitationMapper,
+					   TeamMapper teamMapper,
+					   TagMapper tagMapper) 
 	{
 		this.passwordEncoder = passwordEncoder;
 		this.emailService = emailService;
 		this.userMapper= userMapper;
 		this.organizationMapper = organizationMapper;
 		this.invitationMapper = invitationMapper;
+		this.teamMapper = teamMapper;
+		this.tagMapper = tagMapper;
 	}
 	
 	@Transactional(readOnly=false)
@@ -56,6 +66,30 @@ public class UserService
 	public User findUserByEmail(String email)
 	{
 		return this.userMapper.selectUserByEmail(email);
+	}
+	
+
+	public UserProfile getUserProfile(String email)
+	{
+		UserProfile profile = new UserProfile();
+		User user = this.userMapper.selectUserByEmail(email);
+		Integer userId = user.getId();
+		profile.setId(userId);
+		profile.setName(user.getName());
+		profile.setEmail(user.getEmail());
+		
+		List<Organization> organizations = this.organizationMapper.selectOrganizationsByUserId(userId);
+		if(!organizations.isEmpty())
+		{
+			profile.setOrganizations(organizations);
+			Organization selectedOrganization = organizations.get(0);
+			profile.setSelectedOrganization(selectedOrganization);
+
+			profile.setTeams(this.teamMapper.selectTeamsByUserId(selectedOrganization.getId(), userId));
+			profile.setTags(this.tagMapper.selectTagsByUserId(selectedOrganization.getId(), userId));
+		}
+		
+		return profile;
 	}
 	
 	public void createUser(User user)
@@ -142,4 +176,5 @@ public class UserService
 		}
 		return true;
 	}
+
 }

@@ -62,6 +62,13 @@ CREATE TABLE teams
   CONSTRAINT fk_team_org_id FOREIGN KEY (org_id) REFERENCES organizations (id)
 );
 
+CREATE TABLE teams_users 
+(
+  team_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  disabled tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (team_id,user_id)
+);
 
 CREATE TABLE projects 
 (

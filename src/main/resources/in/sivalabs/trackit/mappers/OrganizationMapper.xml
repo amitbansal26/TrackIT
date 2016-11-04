@@ -5,6 +5,16 @@
         
 <mapper namespace="in.sivalabs.trackit.mappers.OrganizationMapper">
     
+    <resultMap id="OrganizationResultMap" type="Organization">
+    	<id     column="id" property="id"/>
+    	<result column="name" property="name"/>
+    	<result column="owner_user_id" property="owner.id"/>
+    	<result column="created_by" property="createdBy"/>
+    	<result column="created_date" property="createdDate"/>
+    	<result column="updated_by" property="updatedBy"/>
+    	<result column="updated_date" property="updatedDate"/>    	
+    </resultMap>
+    
     <select id="selectOrganizationById" resultType="Organization">
         select * from organizations where id = #{id}
     </select>
@@ -18,6 +28,10 @@
 		   then 1 
 		   else 0 
 		end
+    </select>
+    
+    <select id="selectOrganizationsByUserId" resultType="Organization">
+    	SELECT * FROM organizations WHERE id IN (SELECT org_id FROM orgs_users WHERE user_id = #{userId} AND disabled = FALSE)
     </select>
     
 </mapper>

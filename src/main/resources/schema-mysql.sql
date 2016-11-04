@@ -63,6 +63,14 @@ CREATE TABLE teams
 );
 
 
+CREATE TABLE teams_users 
+(
+  team_id int(11) NOT NULL,
+  user_id int(11) NOT NULL,
+  disabled tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (team_id,user_id)
+);
+
 CREATE TABLE projects 
 (
   id int(11) NOT NULL AUTO_INCREMENT,

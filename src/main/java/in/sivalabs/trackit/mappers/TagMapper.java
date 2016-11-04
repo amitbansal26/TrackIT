@@ -7,16 +7,16 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import in.sivalabs.trackit.domain.Team;
+import in.sivalabs.trackit.domain.Tag;
 
 /**
  * @author Siva
  *
  */
 @Mapper
-public interface TeamMapper 
+public interface TagMapper 
 {
 
-	List<Team> selectTeamsByUserId(Integer orgId, Integer userId);
+	List<Tag> selectTagsByUserId(Integer orgId, Integer userId);
 	
 }
