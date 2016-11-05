@@ -1,4 +1,4 @@
-
+DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS invitations;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS projects;
@@ -102,6 +102,20 @@ CREATE TABLE tasks
   PRIMARY KEY (id),
   CONSTRAINT fk_proj_task_id FOREIGN KEY (proj_id) REFERENCES projects (id),
   CONSTRAINT fk_task_user_id FOREIGN KEY (assigned_user_id) REFERENCES users (id)
+);
+
+CREATE TABLE tags 
+(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(100) NOT NULL,
+  org_id int(11) NOT NULL,
+  created_by int(11) DEFAULT NULL,
+  created_date date DEFAULT NULL,
+  updated_by int(11) DEFAULT NULL,
+  updated_date date DEFAULT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY TAG_NAME_UNIQUE (org_id,name),
+  CONSTRAINT fk_tag_org_id FOREIGN KEY (org_id) REFERENCES organizations (id)
 );
 
 CREATE TABLE invitations 

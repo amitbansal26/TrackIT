@@ -10,8 +10,8 @@ package in.sivalabs.trackit.domain;
 public class Tag extends BaseDomain
 {
 	private Integer id;
-	private Organization organization;
 	private String name;
+	private Organization organization;
 
 	public Integer getId()
 	{
@@ -23,16 +23,6 @@ public class Tag extends BaseDomain
 		this.id = id;
 	}
 
-	public Organization getOrganization()
-	{
-		return organization;
-	}
-
-	public void setOrganization(Organization organization)
-	{
-		this.organization = organization;
-	}
-
 	public String getName()
 	{
 		return name;
@@ -41,6 +31,16 @@ public class Tag extends BaseDomain
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	public Organization getOrganization()
+	{
+		return organization;
+	}
+
+	public void setOrganization(Organization organization)
+	{
+		this.organization = organization;
 	}
 
 }
