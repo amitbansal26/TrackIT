@@ -71,9 +71,9 @@ public class UserServiceTests
 	public void createUser() throws Exception
 	{
 		User user = new User();
-		user.setEmail("prasad@gmail.com");
-		user.setPassword("prasad");
-		user.setName("Prasad");
+		user.setEmail("testuser@gmail.com");
+		user.setPassword("testuser");
+		user.setName("TestUser");
 		userService.createUser(user);
 		assertNotNull(user.getId());
 		/*
