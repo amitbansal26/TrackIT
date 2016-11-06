@@ -13,6 +13,12 @@ public class Tag extends BaseDomain
 	private String name;
 	private Organization organization;
 
+	@Override
+	public String toString()
+	{
+		return "Tag [id=" + id + ", name=" + name + ", organization=" + organization + "]";
+	}
+
 	public Integer getId()
 	{
 		return id;

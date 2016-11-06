@@ -18,6 +18,12 @@ public class Project extends BaseDomain
 	private User owner;
 	private List<User> members = new ArrayList<>(0);
 	
+	@Override
+	public String toString()
+	{
+		return "Project [id=" + id + ", name=" + name + ", team=" + team + ", owner=" + owner + ", members=" + members
+				+ "]";
+	}
 	public Integer getId()
 	{
 		return id;

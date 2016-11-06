@@ -17,8 +17,15 @@ public class Organization extends BaseDomain
 	private User owner;
 	private List<User> members = new ArrayList<>(0);
 	private List<Team> teams = new ArrayList<>(0);
+	private List<Tag> tags = new ArrayList<>(0);
 	
 	
+	@Override
+	public String toString()
+	{
+		return "Organization [id=" + id + ", name=" + name + ", owner=" + owner + ", members=" + members + ", teams="
+				+ teams + ", tags=" + tags + "]";
+	}
 	public Integer getId()
 	{
 		return id;
@@ -59,5 +66,12 @@ public class Organization extends BaseDomain
 	{
 		this.teams = teams;
 	}
-	
+	public List<Tag> getTags()
+	{
+		return tags;
+	}
+	public void setTags(List<Tag> tags)
+	{
+		this.tags = tags;
+	}
 }

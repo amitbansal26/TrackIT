@@ -21,6 +21,12 @@ public class Task extends BaseDomain
 	private Project project;
 	private List<Tag> tags = new ArrayList<>(0);
 	
+	@Override
+	public String toString()
+	{
+		return "Task [id=" + id + ", name=" + name + ", description=" + description + ", assignedUser=" + assignedUser
+				+ ", dueDate=" + dueDate + ", project=" + project + ", tags=" + tags + "]";
+	}
 	public Integer getId()
 	{
 		return id;

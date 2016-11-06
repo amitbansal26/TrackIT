@@ -5,4 +5,18 @@
         
 <mapper namespace="in.sivalabs.trackit.mappers.TeamMapper">
     
+    <resultMap id="TeamResultMap" type="Team">
+    	<id column="id" property="id"/>
+    	<result column="name" property="name"/>
+    	<result column="org_id" property="organization.id"/>
+    	<result column="created_by" property="createdBy"/>
+    	<result column="created_date" property="createdDate"/>
+    	<result column="updated_by" property="updatedBy"/>
+    	<result column="updated_date" property="updatedDate"/> 
+    </resultMap>
+    
+    <select id="selectTeamsByUserId" resultMap="TeamResultMap">
+    	SELECT t.* FROM teams t JOIN teams_users tu ON t.id=tu.team_id AND tu.disabled = FALSE
+		WHERE t.org_id=#{orgId}
+    </select>
 </mapper>

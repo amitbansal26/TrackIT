@@ -3,8 +3,14 @@
  */
 package in.sivalabs.trackit.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import in.sivalabs.trackit.model.UserProfile;
+import in.sivalabs.trackit.security.AuthenticatedUser;
+import in.sivalabs.trackit.services.UserService;
 
 /**
  * @author Siva
@@ -13,6 +19,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController extends BaseController
 {
+	@Autowired
+    private UserService userService;
+	
 	@GetMapping("/")
 	public String index()
 	{
@@ -25,8 +34,12 @@ public class HomeController extends BaseController
 	}
 	
 	@GetMapping("/home")
-	public String home()
+	public String home(Model model)
 	{
+		AuthenticatedUser authenticatedUser = getCurrentUser();
+		String email = authenticatedUser.getUsername();
+		UserProfile userProfile = userService.getUserProfile(email);
+		model.addAttribute("userProfile", userProfile);
 		return "home";
 	}
 }

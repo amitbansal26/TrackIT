@@ -85,8 +85,8 @@ public class UserService
 			Organization selectedOrganization = organizations.get(0);
 			profile.setSelectedOrganization(selectedOrganization);
 
-			profile.setTeams(this.teamMapper.selectTeamsByUserId(selectedOrganization.getId(), userId));
-			profile.setTags(this.tagMapper.selectTagsByUserId(selectedOrganization.getId(), userId));
+			selectedOrganization.setTeams(this.teamMapper.selectTeamsByUserId(selectedOrganization.getId(), userId));
+			selectedOrganization.setTags(this.tagMapper.selectTagsByOrgId(selectedOrganization.getId()));
 		}
 		
 		return profile;

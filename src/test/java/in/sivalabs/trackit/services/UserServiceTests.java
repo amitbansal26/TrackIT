@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import in.sivalabs.trackit.TrackITApplication;
 import in.sivalabs.trackit.config.TrackITSettings;
 import in.sivalabs.trackit.domain.User;
+import in.sivalabs.trackit.model.UserProfile;
 
 /**
  * @author Siva
@@ -99,5 +100,14 @@ public class UserServiceTests
 		String fromEmail = "superadmin@gmail.com";
 		String toEmail = "siva@gmail.com";
 		userService.inviteUser(fromEmail, toEmail, organizationId);
+	}
+	
+	@Test
+	public void getUserProfile() throws Exception
+	{
+		String email = "siva@gmail.com";
+		UserProfile userProfile = userService.getUserProfile(email);
+		assertNotNull(userProfile);
+		System.err.println(userProfile);
 	}
 }

@@ -5,4 +5,17 @@
         
 <mapper namespace="in.sivalabs.trackit.mappers.TagMapper">
     
+    <resultMap id="TagResultMap" type="Tag">
+    	<id column="id" property="id"/>
+    	<result column="name" property="name"/>
+    	<result column="org_id" property="organization.id"/>
+    	<result column="created_by" property="createdBy"/>
+    	<result column="created_date" property="createdDate"/>
+    	<result column="updated_by" property="updatedBy"/>
+    	<result column="updated_date" property="updatedDate"/> 
+    </resultMap>
+    
+    <select id="selectTagsByOrgId" resultMap="TagResultMap">
+    	SELECT t.* FROM tags t WHERE t.org_id=#{orgId}
+    </select>
 </mapper>

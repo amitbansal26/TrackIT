@@ -18,6 +18,12 @@ public class Team extends BaseDomain
 	private List<User> members = new ArrayList<>(0);
 	private List<Project> projects = new ArrayList<>(0);
 	
+	@Override
+	public String toString()
+	{
+		return "Team [id=" + id + ", name=" + name + ", organization=" + organization + ", members=" + members
+				+ ", projects=" + projects + "]";
+	}
 	public Integer getId()
 	{
 		return id;

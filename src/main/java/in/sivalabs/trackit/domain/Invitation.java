@@ -16,6 +16,13 @@ public class Invitation extends BaseDomain
 	private String invitationCode;
 	private boolean accepted;
 	
+	
+	@Override
+	public String toString()
+	{
+		return "Invitation [id=" + id + ", fromEmail=" + fromEmail + ", toEmail=" + toEmail + ", organization="
+				+ organization + ", invitationCode=" + invitationCode + ", accepted=" + accepted + "]";
+	}
 	public Integer getId()
 	{
 		return id;

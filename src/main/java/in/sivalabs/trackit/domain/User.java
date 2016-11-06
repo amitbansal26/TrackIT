@@ -22,6 +22,13 @@ public class User extends BaseDomain
 	private String forgotPasswordToken;
 	private List<Organization> organizations = new ArrayList<>(0);
 
+	@Override
+	public String toString()
+	{
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", enabled=" + enabled + ", locked=" + locked
+				+ "]";
+	}
+
 	public Integer getId()
 	{
 		return id;

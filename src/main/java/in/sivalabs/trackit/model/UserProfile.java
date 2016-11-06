@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.sivalabs.trackit.domain.Organization;
-import in.sivalabs.trackit.domain.Tag;
-import in.sivalabs.trackit.domain.Team;
 
 /**
  * @author Siva
@@ -21,9 +19,13 @@ public class UserProfile
 	private String email;
 	private Organization selectedOrganization;
 	private List<Organization> organizations = new ArrayList<>(0);
-	private List<Team> teams = new ArrayList<>(0);
-	private List<Tag> tags = new ArrayList<>(0);
 	
+	@Override
+	public String toString()
+	{
+		return "UserProfile [id=" + id + ", name=" + name + ", email=" + email + ", selectedOrganization="
+				+ selectedOrganization + ", organizations=" + organizations + "]";
+	}
 	public Integer getId()
 	{
 		return id;
@@ -64,29 +66,4 @@ public class UserProfile
 	{
 		this.organizations = organizations;
 	}
-	public List<Team> getTeams()
-	{
-		return teams;
-	}
-	public void setTeams(List<Team> teams)
-	{
-		this.teams = teams;
-	}
-	/*public List<Project> getProjects()
-	{
-		return projects;
-	}
-	public void setProjects(List<Project> projects)
-	{
-		this.projects = projects;
-	}*/
-	public List<Tag> getTags()
-	{
-		return tags;
-	}
-	public void setTags(List<Tag> tags)
-	{
-		this.tags = tags;
-	}
-	
 }

@@ -6,6 +6,7 @@ package in.sivalabs.trackit.mappers;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import in.sivalabs.trackit.domain.Team;
 
@@ -17,6 +18,6 @@ import in.sivalabs.trackit.domain.Team;
 public interface TeamMapper 
 {
 
-	List<Team> selectTeamsByUserId(Integer orgId, Integer userId);
+	List<Team> selectTeamsByUserId(@Param("orgId") Integer orgId, @Param("userId") Integer userId);
 	
 }
